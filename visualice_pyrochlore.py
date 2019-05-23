@@ -30,7 +30,7 @@ z_pos=np.array([0,0,1,1])
 move=np.ones(len(x_pos))
 
 
-fig=plt.figure()
+fig=plt.figure(figsize=(7,11))
 ax=fig.gca(projection='3d')
 Ni=int(input("Number of tetrahedra in the x direction="))
 Nj=int(input("Number of tetrahedra in the y direction="))
@@ -43,6 +43,7 @@ ones=np.ones(len(x_line))
 y_line=np.linspace(0,Nj*2,points)
 z_line=np.linspace(0,Nk*2,points)
 
+ans=input("Plot nearest neighbours line? (y) or (n): ")
 
 for i in range(Ni):
     for j in range(Nj):
@@ -50,6 +51,7 @@ for i in range(Ni):
 #            X=x+2*i+2*k
 #            Y=y+2*k
 #            Z=z+2*j+2*k
+
             X=x+translation_x*2*i
             Y=y+translation_y*2*j
             Z=z+translation_z*2*k
@@ -58,24 +60,30 @@ for i in range(Ni):
             Y_I=y_i+translation_y*2*j
             Z_I=z_i+translation_z*2*k
             ### Spins being added ###
-            ax.quiver(x_pos+move*2*i,y_pos+move*2*j,z_pos+move*2*k,x_direction,y_direction,z_direction,length=0.2,color="red")
-            ### Position of tetrahedra ###
-            ax.plot(X,Y,Z,color="gray",marker="o")
-
-            ax.plot(X_I,Y_I,Z_I,color="k",marker="o")
-
-#            ax.plot(X+1,Y,Z+1,color="g",marker="o")
 #
-            ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.4)
-            ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.4)
+            ### Position of tetrahedra ###
+            if((i+j)%2==0 and k%2==0):
+                ax.plot(X,Y,Z,color="gray",marker="o")
+                ax.plot(X_I,Y_I,Z_I,color="k",marker="o")
+                ax.quiver(x_pos+move*2*i,y_pos+move*2*j,z_pos+move*2*k,x_direction,y_direction,z_direction,length=0.2,color="red")
             
-            ax.plot(x_line+2*i,-x_line+ones+2*(j+1),ones+2*k,"c--",alpha=0.5)
-            ax.plot(x_line+2*i,-x_line+ones+2*(j-1),ones+2*k,"c--",alpha=0.5)
+            if((i+j)%2==1 and k%2==1):
+                ax.plot(X,Y,Z,color="gray",marker="o")
+                ax.plot(X_I,Y_I,Z_I,color="k",marker="o")
+                ax.quiver(x_pos+move*2*i,y_pos+move*2*j,z_pos+move*2*k,x_direction,y_direction,z_direction,length=0.2,color="red")
+
+            if(ans=="y"):
+                ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.3)
+                ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.3)
+
+                ax.plot(x_line+2*i,-x_line+ones+2*(j+1),ones+2*k,"c--",alpha=0.3)
+                ax.plot(x_line+2*i,-x_line+ones+2*(j-1),ones+2*k,"c--",alpha=0.3)
 
 
-ax.plot(x_line,y_line,z_line,"gold",linewidth=2)
 
 N_max=max(max(Ni,Nj),Nk)
+ax.plot(x_line*N_max,x_line*N_max,x_line*N_max,"gold",linewidth=2)
+
 ax.set_title("%dX%dX%d Pyrochlore" %(Ni,Nj,Nk))
 ax.set_xlim(0,2*N_max)
 ax.set_ylim(0,2*N_max)
