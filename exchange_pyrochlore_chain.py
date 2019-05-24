@@ -99,7 +99,6 @@ for i in range(len(BETA)):
         print("\nindex %d out of %d" %(i,len(BETA)))
     beta=BETA[i]
     #    print(beta,average_energy(eigenvals_exact,eigenvect_exact,beta))
-    
     ########################################################
     ########### Energy of the exact Hamiltonian ############
     ########################################################
@@ -123,9 +122,9 @@ for i in range(len(BETA)):
     eigenvals_effective,eigenvect_effective=H_effective.eigh()
 
     ### Correction term ###
-    J1_correction=2*beta*J_perp**2+16*J*(J_perp*beta)**2
-    J2_correction=-(16*J*(J_perp*beta)**2)/3
-    J3_correction=-(16*J*(J_perp*beta)**2)/3
+    J1_correction=J_perp**2+ (4./3)*(2*N_Neighbours-6)*J*beta*(J_perp)**2
+    J2_correction=-(8*J*beta*(J_perp)**2)/3.
+    J3_correction=-(8*J*beta*(J_perp)**2)/3.
 
     J_1_correction=[[J1_correction,i,j] for (i,j) in NN]
     J_2_correction=[[J2_correction,i,j] for (i,j) in NN2]
@@ -137,8 +136,8 @@ for i in range(len(BETA)):
     
     
     E_effective_val=average_energy(eigenvals_effective,eigenvect_effective,beta)+\
-        thermal_average(eigenvals_effective,eigenvect_effective,dH_eff,beta)-\
-        beta*(J_perp**2)*N_sites*N_Neighbours ### Constant value that must be added
+        beta*thermal_average(eigenvals_effective,eigenvect_effective,dH_eff,beta)-\
+        beta*(J_perp**2)*N_sites*N_Neighbours ### Constant value that must be added, it is added twice because of the \beta factor.
     
     if(E_effective_val.imag>1E-10):
         print("Imaginary part is too big", E_effective_val.imag)
