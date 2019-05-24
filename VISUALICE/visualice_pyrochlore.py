@@ -82,8 +82,10 @@ for i in range(Ni):
 
 
 N_max=max(max(Ni,Nj),Nk)
-ax.plot(x_line*N_max,x_line*N_max,x_line*N_max,"gold",linewidth=2)
-
+ax.plot(x_line*N_max,x_line*N_max,x_line*N_max,"gold",linewidth=2,label="(111)")
+ax.plot(x_line*N_max,zeros,zeros,"magenta",linewidth=2,label="(100)")
+ax.plot(x_line*N_max,x_line*N_max,zeros,"blue",linewidth=2,label="(110)")
+plt.legend()
 ax.set_title("%dX%dX%d Pyrochlore" %(Ni,Nj,Nk))
 ax.set_xlim(0,2*N_max)
 ax.set_ylim(0,2*N_max)
