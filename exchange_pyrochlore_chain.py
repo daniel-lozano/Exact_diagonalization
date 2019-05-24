@@ -73,7 +73,8 @@ def thermal_average(eigenvals,eigenvect,linear_op,beta):
 J=1.0
 J_perp=float(input("Value for J_perp="))
 BETA=np.linspace(0.001,0.5,20)
-N_Neighbours=5
+N_Neighbours=5 #Number of first nearest neighbours
+
 ### Exact parameters ###
 J_1_exact=[[J,i,j] for (i,j) in NN]
 J_1_perp=[[J_perp/2.,i,j] for (i,j) in NN] ### the Half factor is
@@ -109,9 +110,9 @@ for i in range(len(BETA)):
     ######### Defining temperature dependent parameters ####
     ########################################################
     
-    J1=J+2*beta*J_perp**2+8*J*(J_perp*beta)**2
-    J2=-(8*J*(J_perp*beta)**2)/3.
-    J3=-(8*J*(J_perp*beta)**2)/3.
+    J1=J+beta*J_perp**2+ (2./3)*(2*N_Neighbours-6)*J*(J_perp*beta)**2
+    J2=-(4*J*(J_perp*beta)**2)/3.
+    J3=-(4*J*(J_perp*beta)**2)/3.
 
     J_1=[[J1,i,j] for (i,j) in NN]
     J_2=[[J2,i,j] for (i,j) in NN2]
@@ -136,7 +137,8 @@ for i in range(len(BETA)):
     
     
     E_effective_val=average_energy(eigenvals_effective,eigenvect_effective,beta)+\
-        thermal_average(eigenvals_effective,eigenvect_effective,dH_eff,beta)-4*beta*(J_perp**2)*N_sites*N_Neighbours
+        thermal_average(eigenvals_effective,eigenvect_effective,dH_eff,beta)-\
+        beta*(J_perp**2)*N_sites*N_Neighbours ### Constant value that must be added
     
     if(E_effective_val.imag>1E-10):
         print("Imaginary part is too big", E_effective_val.imag)
@@ -155,7 +157,7 @@ print("Energy difference")
 print(E_exact-E_effective)
 
 
-plt.figure(figsize=(20,10))
+plt.figure(figsize=(10,5))
 plt.subplot(211)
 plt.plot(BETA,E_exact,"o-",label="Exact value")
 plt.plot(BETA,E_effective,"o-",label="Effective value")
@@ -167,11 +169,13 @@ plt.semilogy(BETA,abs((E_exact-E_effective)/E_exact),"o-")
 plt.xlabel(" $ \\beta $")
 plt.ylabel("$ |\\Delta E |= |\\frac{E_{exact}-E_{effetive}}{E_{exact}} |$")
 plt.savefig("Energy_Jperp=%f_NT%d.pdf" %(J_perp,N_tetra))
+plt.savefig("Energy_Jperp=%f_NT%d.png" %(J_perp,N_tetra))
 plt.show()
 
 plt.plot(BETA**3,E_exact-E_effective,"o-")
 plt.xlabel(" $ \\beta^3 $")
 plt.ylabel("$ |\\Delta E |= |E_{exact}-E_{effetive} |$")
+plt.savefig("DEnergy_Jperp=%f_NT%d.png" %(J_perp,N_tetra))
 plt.show()
 
 plt.subplot(211)
@@ -188,7 +192,7 @@ plt.ylabel("$ |\\Delta E/\\beta |= |\\frac{E_{exact}-E_{effetive}}{\\beta} | $")
 #plt.title(str(abs(E_exact[0]-E_effective[0])/BETA[0]))
 
 plt.savefig("Energy_beta_Jperp=%f_NT%d.pdf" %(J_perp,N_tetra))
-
+plt.savefig("Energy_beta_Jperp=%f_NT%d.png" %(J_perp,N_tetra))
 
 plt.show()
 
