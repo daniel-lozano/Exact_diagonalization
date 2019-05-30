@@ -43,7 +43,8 @@ ones=np.ones(len(x_line))
 y_line=np.linspace(0,Nj*2,points)
 z_line=np.linspace(0,Nk*2,points)
 
-ans=input("Plot nearest neighbours line? (y) or (n): ")
+ans1=input("Plot nearest neighbours alpha chain? (y) or (n): ")
+ans2=input("Plot nearest neighbours beta chain? (y) or (n): ")
 
 for i in range(Ni):
     for j in range(Nj):
@@ -66,26 +67,39 @@ for i in range(Ni):
                 ax.plot(X,Y,Z,color="gray",marker="o")
                 ax.plot(X_I,Y_I,Z_I,color="k",marker="o")
                 ax.quiver(x_pos+move*2*i,y_pos+move*2*j,z_pos+move*2*k,x_direction,y_direction,z_direction,length=0.2,color="red")
+                
+                if(ans1=="y"):
+                    ax.plot(x_line+2*i+1,-x_line+ones+2*(j+1)+1,ones+2*k,"b--",alpha=0.5,linewidth=5)
+                    ax.plot(x_line+2*i+1,-x_line+ones+2*(j-1)+1,ones+2*k,"b--",alpha=0.5,linewidth=5)
+                if(ans2=="y"):
+                    ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
+                    ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
+                
             
             if((i+j)%2==1 and k%2==1):
                 ax.plot(X,Y,Z,color="gray",marker="o")
                 ax.plot(X_I,Y_I,Z_I,color="k",marker="o")
                 ax.quiver(x_pos+move*2*i,y_pos+move*2*j,z_pos+move*2*k,x_direction,y_direction,z_direction,length=0.2,color="red")
+                
+                if(ans1=="y"):
+                    ax.plot(x_line+2*i+1,-x_line+ones+2*(j+1)+1,ones+2*k,"b--",alpha=0.5,linewidth=5)
+                    ax.plot(x_line+2*i+1,-x_line+ones+2*(j-1)+1,ones+2*k,"b--",alpha=0.5,linewidth=5)
+                if(ans2=="y"):
+                    ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
+                    ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
 
-            if(ans=="y"):
-                ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.3)
-                ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.3)
 
-                ax.plot(x_line+2*i,-x_line+ones+2*(j+1),ones+2*k,"c--",alpha=0.3)
-                ax.plot(x_line+2*i,-x_line+ones+2*(j-1),ones+2*k,"c--",alpha=0.3)
 
 
 
 N_max=max(max(Ni,Nj),Nk)
-ax.plot(x_line*N_max,x_line*N_max,x_line*N_max,"gold",linewidth=2,label="(111)")
-ax.plot(x_line*N_max,zeros,zeros,"magenta",linewidth=2,label="(100)")
-ax.plot(x_line*N_max,x_line*N_max,zeros,"blue",linewidth=2,label="(110)")
-plt.legend()
+ans3=input("Plot directions ? (y) or (n): ")
+if(ans3=="y"):
+    ax.plot(x_line*N_max,x_line*N_max,x_line*N_max,"gold",linewidth=2,label="(111)")
+    ax.plot(x_line*N_max,zeros,zeros,"magenta",linewidth=2,label="(100)")
+    ax.plot(x_line*N_max,x_line*N_max,zeros,"blue",linewidth=2,label="(110)")
+    ax.plot(x_line*N_max,x_line*N_max,x_line*N_max*2,"red",linewidth=2,label="(112)")
+    plt.legend()
 ax.set_title("%dX%dX%d Pyrochlore" %(Ni,Nj,Nk))
 ax.set_xlim(0,2*N_max)
 ax.set_ylim(0,2*N_max)
