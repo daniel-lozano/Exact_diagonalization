@@ -168,7 +168,7 @@ plt.subplot(122)
 plt.loglog(1/BETA[::-1],100*abs((E_exact-E_effective)/E_exact)[::-1],"o-")
 plt.xlabel(" $ T $")
 plt.ylabel("$ |\\Delta E |= |\\frac{E_{exact}-E_{effetive}}{E_{exact}} | \\times 100$",size=15)
-plt.savefig("Energy_Jperp=%f_NT%d.pdf" %(J_perp,N_tetra))
+#plt.savefig("Energy_Jperp=%f_NT%d.pdf" %(J_perp,N_tetra))
 plt.savefig("Energy_Jperp=%f_NT%d.png" %(J_perp,N_tetra))
 plt.show()
 
@@ -191,7 +191,7 @@ plt.xlabel(" $ \\beta $")
 plt.ylabel("$ |\\Delta E/\\beta |= |\\frac{E_{exact}-E_{effetive}}{\\beta} | $")
 #plt.title(str(abs(E_exact[0]-E_effective[0])/BETA[0]))
 
-plt.savefig("Energy_beta_Jperp=%f_NT%d.pdf" %(J_perp,N_tetra))
+#plt.savefig("Energy_beta_Jperp=%f_NT%d.pdf" %(J_perp,N_tetra))
 plt.savefig("Energy_beta_Jperp=%f_NT%d.png" %(J_perp,N_tetra))
 
 plt.show()
