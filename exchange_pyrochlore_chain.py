@@ -72,7 +72,7 @@ def thermal_average(eigenvals,eigenvect,linear_op,beta):
 
 J=1.0
 J_perp=float(input("Value for J_perp="))
-BETA=np.linspace(0.001,0.5,20)
+BETA=np.linspace(0.1,1,20)
 N_Neighbours=5 #Number of first nearest neighbours
 
 ### Exact parameters ###
@@ -109,9 +109,9 @@ for i in range(len(BETA)):
     ######### Defining temperature dependent parameters ####
     ########################################################
     
-    J1=J+beta*J_perp**2+ (2./3)*(2*N_Neighbours-6)*J*(J_perp*beta)**2
-    J2=-(4*J*(J_perp*beta)**2)/3.
-    J3=-(4*J*(J_perp*beta)**2)/3.
+    J1=J+beta*J_perp**2- (2./3)*(2*N_Neighbours-6)*J*(J_perp*beta)**2
+    J2=+(4*J*(J_perp*beta)**2)/3.
+    J3=+(4*J*(J_perp*beta)**2)/3.
 
     J_1=[[J1,i,j] for (i,j) in NN]
     J_2=[[J2,i,j] for (i,j) in NN2]
@@ -122,9 +122,9 @@ for i in range(len(BETA)):
     eigenvals_effective,eigenvect_effective=H_effective.eigh()
 
     ### Correction term ###
-    J1_correction=J_perp**2+ (4./3)*(2*N_Neighbours-6)*J*beta*(J_perp)**2
-    J2_correction=-(8*J*beta*(J_perp)**2)/3.
-    J3_correction=-(8*J*beta*(J_perp)**2)/3.
+    J1_correction=J_perp**2- (4./3)*(2*N_Neighbours-6)*J*beta*(J_perp)**2
+    J2_correction=+(8*J*beta*(J_perp)**2)/3.
+    J3_correction=+(8*J*beta*(J_perp)**2)/3.
 
     J_1_correction=[[J1_correction,i,j] for (i,j) in NN]
     J_2_correction=[[J2_correction,i,j] for (i,j) in NN2]
@@ -156,17 +156,18 @@ print("Energy difference")
 print(E_exact-E_effective)
 
 
-plt.figure(figsize=(10,5))
-plt.subplot(211)
-plt.plot(BETA,E_exact,"o-",label="Exact value")
-plt.plot(BETA,E_effective,"o-",label="Effective value")
+plt.figure(figsize=(15,5))
+plt.subplot(121)
+plt.semilogx(1/BETA[::-1],E_exact[::-1],"o-",label="Exact value")
+plt.semilogx(1/BETA[::-1],E_effective[::-1],"o-",label="Effective value")
 plt.legend()
 plt.ylabel("$ \\mathrm{Energy} $")
+plt.xlabel(" $ T $")
 plt.title(" %d Number of tetrahedra for $J_\perp$=%f" %(N_tetra,J_perp))
-plt.subplot(212)
-plt.semilogy(BETA,abs((E_exact-E_effective)/E_exact),"o-")
-plt.xlabel(" $ \\beta $")
-plt.ylabel("$ |\\Delta E |= |\\frac{E_{exact}-E_{effetive}}{E_{exact}} |$")
+plt.subplot(122)
+plt.loglog(1/BETA[::-1],100*abs((E_exact-E_effective)/E_exact)[::-1],"o-")
+plt.xlabel(" $ T $")
+plt.ylabel("$ |\\Delta E |= |\\frac{E_{exact}-E_{effetive}}{E_{exact}} | \\times 100$",size=15)
 plt.savefig("Energy_Jperp=%f_NT%d.pdf" %(J_perp,N_tetra))
 plt.savefig("Energy_Jperp=%f_NT%d.png" %(J_perp,N_tetra))
 plt.show()
