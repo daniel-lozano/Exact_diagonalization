@@ -31,12 +31,12 @@ for i in range(N_sites):
 
     NN2.append((i,(i+4)%N_sites))
 
-#print("Nearest Neighbours")
-#print(NN)
-#print("Second Nearest Neighbours")
-#print(NN2)
-#print("Third Nearest Neighbours")
-#print(NN3)
+print("Nearest Neighbours")
+print(NN)
+print("Second Nearest Neighbours")
+print(NN2)
+print("Third Nearest Neighbours")
+print(NN3)
 
 ########################################################################
 ###Functions used in the code, Energy average and operator average ###
@@ -110,8 +110,8 @@ for i in range(len(BETA)):
     ########################################################
     
     J1=J+beta*J_perp**2- (2./3)*(2*N_Neighbours-6)*J*(J_perp*beta)**2
-    J2=+(4*J*(J_perp*beta)**2)/3.
-    J3=+(4*J*(J_perp*beta)**2)/3.
+    J2=+2*(4*J*(J_perp*beta)**2)/3.
+    J3=+2*(4*J*(J_perp*beta)**2)/3.
 
     J_1=[[J1,i,j] for (i,j) in NN]
     J_2=[[J2,i,j] for (i,j) in NN2]
@@ -123,8 +123,8 @@ for i in range(len(BETA)):
 
     ### Correction term ###
     J1_correction=J_perp**2- (4./3)*(2*N_Neighbours-6)*J*beta*(J_perp)**2
-    J2_correction=+(8*J*beta*(J_perp)**2)/3.
-    J3_correction=+(8*J*beta*(J_perp)**2)/3.
+    J2_correction=+2*(8*J*beta*(J_perp)**2)/3.
+    J3_correction=+2*(8*J*beta*(J_perp)**2)/3.
 
     J_1_correction=[[J1_correction,i,j] for (i,j) in NN]
     J_2_correction=[[J2_correction,i,j] for (i,j) in NN2]
