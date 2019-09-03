@@ -41,6 +41,7 @@ ones=np.ones(len(x_line))
 y_line=np.linspace(0,Nj*2,points)
 z_line=np.linspace(0,Nk*2,points)
 
+ans0=input("Plot lattice connections? (y) or (n):")
 ans1=input("Plot nearest neighbours alpha chain? (y) or (n): ")
 ans2=input("Plot nearest neighbours beta chain? (y) or (n): ")
 
@@ -62,27 +63,29 @@ for i in range(Ni):
             #
             ### Position of tetrahedra ###
             if((i+j)%2==0 and k%2==0):
-                ax.plot(X,Y,Z,color="gray")
-                ax.plot(X_I,Y_I,Z_I,color="gray")
+                if(ans0=="y"):
+                    ax.plot(X,Y,Z,color="gray")
+                    ax.plot(X_I,Y_I,Z_I,color="gray")
                 
                 if(ans1=="y"):
                     ax.plot(x_line+2*i+1,-x_line+ones+2*(j+1)+1,ones+2*k,"b--",alpha=0.5,linewidth=3)
                     ax.plot(x_line+2*i+1,-x_line+ones+2*(j-1)+1,ones+2*k,"b--",alpha=0.5,linewidth=3)
                 if(ans2=="y"):
-                    ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
-                    ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
+                    ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="magenta",alpha=0.5)
+                    ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="magenta",alpha=0.5)
         
             
             if((i+j)%2==1 and k%2==1):
-                ax.plot(X,Y,Z,color="gray")
-                ax.plot(X_I,Y_I,Z_I,color="gray")
+                if(ans0=="y"):
+                    ax.plot(X,Y,Z,color="gray")
+                    ax.plot(X_I,Y_I,Z_I,color="gray")
                 
                 if(ans1=="y"):
                     ax.plot(x_line+2*i+1,-x_line+ones+2*(j+1)+1,ones+2*k,"b--",alpha=0.5,linewidth=3)
                     ax.plot(x_line+2*i+1,-x_line+ones+2*(j-1)+1,ones+2*k,"b--",alpha=0.5,linewidth=3)
                 if(ans2=="y"):
-                    ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
-                    ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="lime",alpha=0.5)
+                    ax.plot(x_line+2*i,x_line+2*j,zeros+2*k,"--",color="magenta",alpha=0.5)
+                    ax.plot(x_line-2*i,x_line+2*j,zeros+2*k,"--",color="magenta",alpha=0.5)
 
 
 
@@ -123,28 +126,7 @@ translation_z=np.ones(len(z))
 ############################### Sites in the Lattice ######################
 ###########################################################################
 
-x_direction=np.array([1,1,-1,-1])
-y_direction=np.array([1,1,1,1])
-z_direction=np.array([1,-1,-1,1])
 
-x_pos=np.array([0,1,1,0])
-y_pos=np.array([0,1,0,1])
-z_pos=np.array([0,0,1,1])
-move=np.ones(len(x_pos))
-
-#
-#fig=plt.figure(figsize=(6,6))
-#ax=fig.gca(projection='3d')
-#Ni=int(input("Number of tetrahedra in the x direction="))
-#Nj=int(input("Number of tetrahedra in the y direction="))
-#Nk=int(input("Number of tetrahedra in the z direction="))
-
-points=10
-x_line=np.linspace(0,Ni*2,points)
-zeros=np.zeros(len(x_line))
-ones=np.ones(len(x_line))
-y_line=np.linspace(0,Nj*2,points)
-z_line=np.linspace(0,Nk*2,points)
 
 SITES=[]
 for i in range(Ni):
@@ -158,12 +140,12 @@ for i in range(Ni):
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
            
-                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=100,alpha=1)
+                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
             
             if((i+j)%2==1 and k%2==1):
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
-                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=100,alpha=1)
+                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
 
 N=int(np.size(SITES)/4)
       
@@ -190,10 +172,11 @@ r6=np.sqrt(18)
 R=[r1,r2,r3,r4]
 
 #R=[r2]
-ans=input("plot interactions ? (y) or (n): ")
+ans=input("Plot interactions ? (y) or (n): ")
 if(ans=="y"):
     names=["$ J_1 $","$ J_2 $","$ J_{3b} $","$ J_4 $","$ J_5 $","$ J_6 $"]
     i=0
+    
     for i in range(len(R)):
         r=R[i]
     #    print(type(r))
@@ -222,7 +205,7 @@ if(ans=="y"):
                         #                i+=1
                         a=1
                         break
-
+    plt.legend()
 
 
 
@@ -236,11 +219,80 @@ ax.set_zlim(0,2*N_max)
 ax.set_xlabel("$ x $",size=20)
 ax.set_ylabel("$ y $",size=20)
 ax.set_zlabel("$ z $",size=20)
-plt.legend()
+#plt.legend()
+#plt.show()
+
+
+BASE=3
+print("Base site", SITES[2])
+LIST=[]
+Length=[0]
+Num_steps=3
+
+for l in range(1,Num_steps+1):
+    
+    current=SITES[BASE]
+    steps=[BASE]
+    print(steps)
+    print("l=%f" %l)
+    a=0
+    while(len(steps)<l+1 and a==0):
+        
+        for i in range(len(SITES)):
+            
+            if( (abs(np.linalg.norm(current[:3]-SITES[i][:3])-r1) <1E-2 or
+                 abs(np.linalg.norm(current[:3]-SITES[i][:3])-r2) <1E-2 or
+                 abs(np.linalg.norm(current[:3]-SITES[i][:3])-r3) <1E-2) and ### 1st NN
+               len(steps)!=l and ### Not the last step
+               current[3]!=SITES[i][3] ): ## Not the same site
+                
+                current=SITES[i]
+                print("  ",SITES[i])
+                steps.append(i)
+
+            elif( (abs(np.linalg.norm(current[:3]-SITES[i][:3])-r1) <1E-2 or
+                   abs(np.linalg.norm(current[:3]-SITES[i][:3])-r2) <1E-2 or
+                   abs(np.linalg.norm(current[:3]-SITES[i][:3])-r3) <1E-2) and
+                 (SITES[i][3]==4 or SITES[i][3]==2) and ### Getting to the last site
+                 current[3]!=SITES[i][3] ): ### Not the same site
+                
+                current=SITES[i]
+                print("_",SITES[i])
+                steps.append(i)
+                print("len(steps)=%f" %len(steps))
+                a=1
+                break
+
+    print("steps=",steps)
+    if(len(steps)!=1 ):
+        Length.append(len(steps))
+        LIST=np.concatenate((LIST,steps)).astype(int)
+        
+        print("List=",LIST)
+
+
+
+print(LIST)
+print()
+
+
+
+
+
+#### Defining the positions of the path ###
+ans=input("Plot paths? (y) or (n): ")
+if(ans=="y"):
+    for l_index in range(1,len(Length)):
+        l_init=np.sum(Length[:l_index])
+        l_final=l_init+Length[l_index]
+        print(l_init)
+        print(LIST[l_init:l_final])
+
+        Posx=[SITES[LIST[i]][0] for i in range(l_init,l_final)]
+        Posy=[SITES[LIST[i]][1] for i in range(l_init,l_final)]
+        Posz=[SITES[LIST[i]][2] for i in range(l_init,l_final)]
+        ax.plot(Posx,Posy,Posz,linewidth=5)
 plt.show()
-
-
-
 
 
 
