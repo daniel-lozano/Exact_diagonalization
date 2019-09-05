@@ -140,14 +140,14 @@ for i in range(0,Ni,1):
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
            
-                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
-#                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
+#                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
+                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
 
             if((i+j)%2==1 and k%2==1):
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
-                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
-#                ax.scatter(X,Y,Z,c=["gold","k","r","b"][1],s=50,alpha=1)
+#                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
+                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
 
 
 N=int(np.size(SITES)/4)
@@ -183,17 +183,16 @@ r15=np.sqrt(40)
 r16=np.sqrt(42)
 r17=np.sqrt(46)
 r18=np.sqrt(48)
-#R=[r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18]
-R=[r3,r6,r9,r12,r15,r18]
-#R=[r3,r6,r9]
-
-#R=[r1,r2,r3,r4]
+R=[r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18]
+#R=[r3,r6,r9,r12,r15,r18]
+#R=[r6,r7]
 
 #R=[r2]
 ans=input("Plot interactions ? (y) or (n): ")
 if(ans=="y"):
-#    names=["$ J_1 $","$ J_2 $","$ J_{3b} $","$ J_4 $","$ J_5 $","$ J_6 $","$ J_7 $","$ J_8 $","$ J_9 $","$ J_{10} $","$ J_{11} $","$ J_{12} $","$ J_{13} $","$ J_{14} $","$ J_{15} $","$ J_{16} $","$ J_{17} $","$ J_{18} $"]
-    names=["$ J_{3b} $","$ J_6 $","$ J_9 $","$ J_{12} $","$ J_{15} $","$ J_{18} $"]
+    names=["$ J_1 $","$ J_2 $","$ J_{3b} $","$ J_4 $","$ J_5 $","$ J_6 $","$ J_7 $","$ J_8 $","$ J_9 $","$ J_{10} $","$ J_{11} $","$ J_{12} $","$ J_{13} $","$ J_{14} $","$ J_{15} $","$ J_{16} $","$ J_{17} $","$ J_{18} $"]
+#    names=["$ J_{3b} $","$ J_6 $","$ J_9 $","$ J_{12} $","$ J_{15} $","$ J_{18} $"]
+#    names=["$ J_{6} $","$ J_{7} $"]
 
     i=0
     
@@ -203,7 +202,7 @@ if(ans=="y"):
 
         a=0
         for k in range(1,len(SITES)):
-            if(a!=0):
+            if(a!=0 or k==2):
                 break
             
 
@@ -211,11 +210,10 @@ if(ans=="y"):
                 
                 if(np.linalg.norm(SITES[k][:3]-SITES[j][:3])!=0 and abs(np.linalg.norm((SITES[k][:3]-SITES[j][:3]))-r)<1E-2):
                     ax.plot([SITES[k][0],SITES[j][0]],[SITES[k][1],SITES[j][1]],[SITES[k][2],SITES[j][2]],linewidth=5,label=names[i])#,c=str(r/(max(R)*10)))
-    #                i+=1
-                    a=1
+                    if(len(R)!=1):
+                        a=1
+                        break
 
-                    break
-            
             if(names[i]=="$ J_{3b} $"):
                
                 for j in range(len(SITES)):
@@ -223,8 +221,10 @@ if(ans=="y"):
                     if(np.linalg.norm(SITES[k][:3]-SITES[j][:3])!=0 and abs(np.linalg.norm((SITES[k][:3]-SITES[j][:3]))-r)<1E-2 and (SITES[k][2]-SITES[j][2])==0 ):
                         ax.plot([SITES[k][0],SITES[j][0]],[SITES[k][1],SITES[j][1]],[SITES[k][2],SITES[j][2]],linewidth=5,label="$ J_{3a} $")#,c=str(r/(max(R)*10)))
                         #                i+=1
-                        a=1
-                        break
+                        #                        if(len(R)!=1):
+                        if(len(R)!=1):
+                            a=1
+                            break
     plt.legend()
 
 
@@ -294,9 +294,6 @@ for l in range(1,Num_steps+1):
 
 print(LIST)
 print()
-
-
-
 
 
 #### Defining the positions of the path ###
