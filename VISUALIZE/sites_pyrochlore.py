@@ -129,9 +129,9 @@ translation_z=np.ones(len(z))
 
 
 SITES=[]
-for i in range(Ni):
-    for j in range(Nj):
-        for k in range(Nk):
+for i in range(0,Ni,1):
+    for j in range(0,Nj,1):
+        for k in range(0,Nk,1):
 
             X=x+translation_x*2*i
             Y=y+translation_y*2*j
@@ -140,12 +140,15 @@ for i in range(Ni):
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
            
-                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
-            
+                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
+#                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
+
             if((i+j)%2==1 and k%2==1):
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
-                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
+                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
+#                ax.scatter(X,Y,Z,c=["gold","k","r","b"][1],s=50,alpha=1)
+
 
 N=int(np.size(SITES)/4)
       
@@ -160,21 +163,38 @@ for i in range(len(SITES)):
 
 #print(set(np.sort(distance)))
 
-R=list(set(np.sort(distance)))
-#print(R)
+R=np.array(list(set(distance)))
+print(np.sort(R**2)/2)
 r1=np.sqrt(2)
 r2=np.sqrt(6)
 r3=np.sqrt(8)
 r4=np.sqrt(10)
 r5=np.sqrt(14)
-r6=np.sqrt(18)
-#R=[r1,r2,r3,r4,r5,r6]
-R=[r1,r2,r3,r4]
+r6=np.sqrt(16)
+r7=np.sqrt(18)
+r8=np.sqrt(22)
+r9=np.sqrt(24)
+r10=np.sqrt(26)
+r11=np.sqrt(30)
+r12=np.sqrt(32)
+r13=np.sqrt(34)
+r14=np.sqrt(38)
+r15=np.sqrt(40)
+r16=np.sqrt(42)
+r17=np.sqrt(46)
+r18=np.sqrt(48)
+#R=[r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18]
+R=[r3,r6,r9,r12,r15,r18]
+#R=[r3,r6,r9]
+
+#R=[r1,r2,r3,r4]
 
 #R=[r2]
 ans=input("Plot interactions ? (y) or (n): ")
 if(ans=="y"):
-    names=["$ J_1 $","$ J_2 $","$ J_{3b} $","$ J_4 $","$ J_5 $","$ J_6 $"]
+#    names=["$ J_1 $","$ J_2 $","$ J_{3b} $","$ J_4 $","$ J_5 $","$ J_6 $","$ J_7 $","$ J_8 $","$ J_9 $","$ J_{10} $","$ J_{11} $","$ J_{12} $","$ J_{13} $","$ J_{14} $","$ J_{15} $","$ J_{16} $","$ J_{17} $","$ J_{18} $"]
+    names=["$ J_{3b} $","$ J_6 $","$ J_9 $","$ J_{12} $","$ J_{15} $","$ J_{18} $"]
+
     i=0
     
     for i in range(len(R)):
@@ -247,7 +267,7 @@ for l in range(1,Num_steps+1):
                current[3]!=SITES[i][3] ): ## Not the same site
                 
                 current=SITES[i]
-                print("  ",SITES[i])
+#                print("  ",SITES[i])
                 steps.append(i)
 
             elif( (abs(np.linalg.norm(current[:3]-SITES[i][:3])-r1) <1E-2 or
@@ -257,18 +277,18 @@ for l in range(1,Num_steps+1):
                  current[3]!=SITES[i][3] ): ### Not the same site
                 
                 current=SITES[i]
-                print("_",SITES[i])
+#                print("_",SITES[i])
                 steps.append(i)
-                print("len(steps)=%f" %len(steps))
+#                print("len(steps)=%f" %len(steps))
                 a=1
                 break
 
-    print("steps=",steps)
+#    print("steps=",steps)
     if(len(steps)!=1 ):
         Length.append(len(steps))
         LIST=np.concatenate((LIST,steps)).astype(int)
         
-        print("List=",LIST)
+#        print("List=",LIST)
 
 
 
