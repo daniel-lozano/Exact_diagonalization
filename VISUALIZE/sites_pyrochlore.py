@@ -67,6 +67,26 @@ for i in range(Ni):
                     ax.plot(X,Y,Z,color="gray")
                     ax.plot(X_I,Y_I,Z_I,color="gray")
                 
+                    ax.plot(X-translation_x*4*i,Y,Z,color="gray")
+                    ax.plot(X,Y-translation_y*4*j,Z,color="gray")
+                    ax.plot(X,Y,Z-translation_z*4*k,color="gray")
+                    
+                    ax.plot(X-translation_x*4*i,Y-translation_y*4*j,Z,color="gray")
+                    ax.plot(X-translation_x*4*i,Y,Z-translation_z*4*k,color="gray")
+                    ax.plot(X,Y-translation_y*4*j,Z-translation_z*4*k,color="gray")
+                    ax.plot(X-translation_x*4*i,Y-translation_y*4*j,Z-translation_z*4*k,color="gray")
+                    
+                    ax.plot(X_I-translation_x*4*i,Y_I,Z_I,color="gray")
+                    ax.plot(X_I,Y_I-translation_y*4*j,Z_I,color="gray")
+                    ax.plot(X_I,Y_I,Z_I-translation_z*4*k,color="gray")
+                    
+                    ax.plot(X_I-translation_x*4*i,Y_I-translation_y*4*j,Z_I,color="gray")
+                    ax.plot(X_I-translation_x*4*i,Y_I,Z_I-translation_z*4*k,color="gray")
+                    ax.plot(X_I,Y_I-translation_y*4*j,Z_I-translation_z*4*k,color="gray")
+                    ax.plot(X_I-translation_x*4*i,Y_I-translation_y*4*j,Z_I-translation_z*4*k,color="gray")
+
+
+                
                 if(ans1=="y"):
                     ax.plot(x_line+2*i+1,-x_line+ones+2*(j+1)+1,ones+2*k,"b--",alpha=0.5,linewidth=3)
                     ax.plot(x_line+2*i+1,-x_line+ones+2*(j-1)+1,ones+2*k,"b--",alpha=0.5,linewidth=3)
@@ -79,6 +99,25 @@ for i in range(Ni):
                 if(ans0=="y"):
                     ax.plot(X,Y,Z,color="gray")
                     ax.plot(X_I,Y_I,Z_I,color="gray")
+                
+                    ax.plot(X-translation_x*4*i,Y,Z,color="gray")
+                    ax.plot(X,Y-translation_y*4*j,Z,color="gray")
+                    ax.plot(X,Y,Z-translation_z*4*k,color="gray")
+                    
+                    ax.plot(X-translation_x*4*i,Y-translation_y*4*j,Z,color="gray")
+                    ax.plot(X-translation_x*4*i,Y,Z-translation_z*4*k,color="gray")
+                    ax.plot(X,Y-translation_y*4*j,Z-translation_z*4*k,color="gray")
+                    ax.plot(X-translation_x*4*i,Y-translation_y*4*j,Z-translation_z*4*k,color="gray")
+                
+                    ax.plot(X_I-translation_x*4*i,Y_I,Z_I,color="gray")
+                    ax.plot(X_I,Y_I-translation_y*4*j,Z_I,color="gray")
+                    ax.plot(X_I,Y_I,Z_I-translation_z*4*k,color="gray")
+                    
+                    ax.plot(X_I-translation_x*4*i,Y_I-translation_y*4*j,Z_I,color="gray")
+                    ax.plot(X_I-translation_x*4*i,Y_I,Z_I-translation_z*4*k,color="gray")
+                    ax.plot(X_I,Y_I-translation_y*4*j,Z_I-translation_z*4*k,color="gray")
+                    ax.plot(X_I-translation_x*4*i,Y_I-translation_y*4*j,Z_I-translation_z*4*k,color="gray")
+
                 
                 if(ans1=="y"):
                     ax.plot(x_line+2*i+1,-x_line+ones+2*(j+1)+1,ones+2*k,"b--",alpha=0.5,linewidth=3)
@@ -137,17 +176,62 @@ for i in range(0,Ni,1):
             Y=y+translation_y*2*j
             Z=z+translation_z*2*k
             if((i+j)%2==0 and k%2==0):
+                
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
+                    
+                    SITES.append(np.array([X[nu]-4,Y[nu],Z[nu],mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu]-4,Z[nu],mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu],Z[nu]-4,mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
+                    
+                    SITES.append(np.array([X[nu]-4,Y[nu]-4,Z[nu],mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu]-4,Z[nu]-4,mu[nu]]))
+                    SITES.append(np.array([X[nu]-4,Y[nu],Z[nu]-4,mu[nu]]))
+                    SITES.append(np.array([X[nu]-4,Y[nu]-4,Z[nu]-4,mu[nu]]))
+                
            
 #                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
-                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
+                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=10,alpha=1)
+               
+                ax.scatter(X-translation_x*4*i,Y,Z,c=["gold","k","r","b"],s=10,alpha=1)
+                ax.scatter(X,Y-translation_y*4*j,Z,c=["gold","k","r","b"],s=10,alpha=1)
+                ax.scatter(X,Y,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
+                
+                ax.scatter(X-translation_x*4*i,Y-translation_y*4*j,Z,c=["gold","k","r","b"],s=10,alpha=1)
+                ax.scatter(X-translation_x*4*i,Y,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
+                ax.scatter(X,Y-translation_y*4*j,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
+                ax.scatter(X-translation_x*4*i,Y-translation_y*4*j,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
+
+
+
+
 
             if((i+j)%2==1 and k%2==1):
                 for nu in range(len(Z)):
                     SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
+                    
+                    SITES.append(np.array([X[nu]-4,Y[nu],Z[nu],mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu]-4,Z[nu],mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu],Z[nu]-4,mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu],Z[nu],mu[nu]]))
+                    
+                    SITES.append(np.array([X[nu]-4,Y[nu]-4,Z[nu],mu[nu]]))
+                    SITES.append(np.array([X[nu],Y[nu]-4,Z[nu]-4,mu[nu]]))
+                    SITES.append(np.array([X[nu]-4,Y[nu],Z[nu]-4,mu[nu]]))
+                    SITES.append(np.array([X[nu]-4,Y[nu]-4,Z[nu]-4,mu[nu]]))
 #                ax.scatter(X[1],Y[1],Z[1],c=["gold","k","r","b"][1],s=50,alpha=1)
-                ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=50,alpha=1)
+
+                    ax.scatter(X,Y,Z,c=["gold","k","r","b"],s=10,alpha=1)
+                    
+                    ax.scatter(X-translation_x*4*i,Y,Z,c=["gold","k","r","b"],s=10,alpha=1)
+                    ax.scatter(X,Y-translation_y*4*j,Z,c=["gold","k","r","b"],s=10,alpha=1)
+                    ax.scatter(X,Y,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
+                    
+                    ax.scatter(X-translation_x*4*i,Y-translation_y*4*j,Z,c=["gold","k","r","b"],s=10,alpha=1)
+                    ax.scatter(X-translation_x*4*i,Y,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
+                    ax.scatter(X,Y-translation_y*4*j,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
+                    ax.scatter(X-translation_x*4*i,Y-translation_y*4*j,Z-translation_z*4*k,c=["gold","k","r","b"],s=10,alpha=1)
 
 
 N=int(np.size(SITES)/4)
@@ -185,14 +269,13 @@ r17=np.sqrt(46)
 r18=np.sqrt(48)
 R=[r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16,r17,r18]
 #R=[r3,r6,r9,r12,r15,r18]
-#R=[r6,r7]
+R=[r3]
 
-#R=[r2]
 ans=input("Plot interactions ? (y) or (n): ")
 if(ans=="y"):
-    names=["$ J_1 $","$ J_2 $","$ J_{3b} $","$ J_4 $","$ J_5 $","$ J_6 $","$ J_7 $","$ J_8 $","$ J_9 $","$ J_{10} $","$ J_{11} $","$ J_{12} $","$ J_{13} $","$ J_{14} $","$ J_{15} $","$ J_{16} $","$ J_{17} $","$ J_{18} $"]
+#    names=["$ J_1 $","$ J_2 $","$ J_{3b} $","$ J_4 $","$ J_5 $","$ J_6 $","$ J_7 $","$ J_8 $","$ J_9 $","$ J_{10} $","$ J_{11} $","$ J_{12} $","$ J_{13} $","$ J_{14} $","$ J_{15} $","$ J_{16} $","$ J_{17} $","$ J_{18} $"]
 #    names=["$ J_{3b} $","$ J_6 $","$ J_9 $","$ J_{12} $","$ J_{15} $","$ J_{18} $"]
-#    names=["$ J_{6} $","$ J_{7} $"]
+    names=["$ J_{3} $","$ J_{7} $"]
 
     i=0
     
@@ -201,18 +284,26 @@ if(ans=="y"):
     #    print(type(r))
 
         a=0
-        for k in range(1,len(SITES)):
-            if(a!=0 or k==2):
+        for k in range(0,len(SITES)):
+            if(a!=0 or k==1):
                 break
             
 
             for j in range(len(SITES)):
                 
-                if(np.linalg.norm(SITES[k][:3]-SITES[j][:3])!=0 and abs(np.linalg.norm((SITES[k][:3]-SITES[j][:3]))-r)<1E-2):
-                    ax.plot([SITES[k][0],SITES[j][0]],[SITES[k][1],SITES[j][1]],[SITES[k][2],SITES[j][2]],linewidth=5,label=names[i])#,c=str(r/(max(R)*10)))
-                    if(len(R)!=1):
+                if(len(R)!=1):
+                    if(np.linalg.norm(SITES[k][:3]-SITES[j][:3])!=0 and abs(np.linalg.norm((SITES[k][:3]-SITES[j][:3]))-r)<1E-2):
+                        ax.plot([SITES[k][0],SITES[j][0]],[SITES[k][1],SITES[j][1]],[SITES[k][2],SITES[j][2]],linewidth=5,label=names[i])#,c=str(r/(max(R)*10)))
+                        
                         a=1
                         break
+                else:
+                    if(np.linalg.norm(SITES[k][:3]-SITES[j][:3])!=0 and abs(np.linalg.norm((SITES[k][:3]-SITES[j][:3]))-r)<1E-2):
+                        ax.plot([SITES[k][0],SITES[j][0]],[SITES[k][1],SITES[j][1]],[SITES[k][2],SITES[j][2]],"k",linewidth=5,label=names[i],)#,c=str(r/(max(R)*10)))
+                        
+#                        a=1
+#                        break
+
 
             if(names[i]=="$ J_{3b} $"):
                
@@ -233,9 +324,9 @@ if(ans=="y"):
 N_max=max(max(Ni,Nj),Nk)
 
 ax.set_title("%dX%dX%d Pyrochlore" %(Ni,Nj,Nk))
-ax.set_xlim(0,2*N_max)
-ax.set_ylim(0,2*N_max)
-ax.set_zlim(0,2*N_max)
+ax.set_xlim(-N_max,2*N_max)
+ax.set_ylim(-2*N_max,2*N_max)
+ax.set_zlim(-2*N_max,2*N_max)
 ax.set_xlabel("$ x $",size=20)
 ax.set_ylabel("$ y $",size=20)
 ax.set_zlabel("$ z $",size=20)
@@ -243,62 +334,61 @@ ax.set_zlabel("$ z $",size=20)
 #plt.show()
 
 
-BASE=3
-print("Base site", SITES[2])
-LIST=[]
-Length=[0]
-Num_steps=3
-
-for l in range(1,Num_steps+1):
-    
-    current=SITES[BASE]
-    steps=[BASE]
-    print(steps)
-    print("l=%f" %l)
-    a=0
-    while(len(steps)<l+1 and a==0):
-        
-        for i in range(len(SITES)):
-            
-            if( (abs(np.linalg.norm(current[:3]-SITES[i][:3])-r1) <1E-2 or
-                 abs(np.linalg.norm(current[:3]-SITES[i][:3])-r2) <1E-2 or
-                 abs(np.linalg.norm(current[:3]-SITES[i][:3])-r3) <1E-2) and ### 1st NN
-               len(steps)!=l and ### Not the last step
-               current[3]!=SITES[i][3] ): ## Not the same site
-                
-                current=SITES[i]
-#                print("  ",SITES[i])
-                steps.append(i)
-
-            elif( (abs(np.linalg.norm(current[:3]-SITES[i][:3])-r1) <1E-2 or
-                   abs(np.linalg.norm(current[:3]-SITES[i][:3])-r2) <1E-2 or
-                   abs(np.linalg.norm(current[:3]-SITES[i][:3])-r3) <1E-2) and
-                 (SITES[i][3]==4 or SITES[i][3]==2) and ### Getting to the last site
-                 current[3]!=SITES[i][3] ): ### Not the same site
-                
-                current=SITES[i]
-#                print("_",SITES[i])
-                steps.append(i)
-#                print("len(steps)=%f" %len(steps))
-                a=1
-                break
-
-#    print("steps=",steps)
-    if(len(steps)!=1 ):
-        Length.append(len(steps))
-        LIST=np.concatenate((LIST,steps)).astype(int)
-        
-#        print("List=",LIST)
-
-
-
-print(LIST)
-print()
 
 
 #### Defining the positions of the path ###
 ans=input("Plot paths? (y) or (n): ")
 if(ans=="y"):
+    
+
+    BASE=3
+    print("Base site", SITES[2])
+    LIST=[]
+    Length=[0]
+    Num_steps=2
+
+    for l in range(1,Num_steps+1):
+        
+        current=SITES[BASE]
+        steps=[BASE]
+        print(steps)
+        print("l=%f" %l)
+        a=0
+        while(len(steps)<l+1 and a==0):
+            
+            for i in range(len(SITES)):
+                
+                if( (abs(np.linalg.norm(current[:3]-SITES[i][:3])-r1) <1E-2 or abs(np.linalg.norm(current[:3]-SITES[i][:3])-r2) <1E-2 or                 abs(np.linalg.norm(current[:3]-SITES[i][:3])-r3) <1E-2) and len(steps)!=l and current[3]!=SITES[i][3] ): ## Not the same site
+                    
+                    current=SITES[i]
+                    #                print("  ",SITES[i])
+                    steps.append(i)
+                        
+                elif( (abs(np.linalg.norm(current[:3]-SITES[i][:3])-r1) <1E-2 or
+                      abs(np.linalg.norm(current[:3]-SITES[i][:3])-r2) <1E-2 or
+                      abs(np.linalg.norm(current[:3]-SITES[i][:3])-r3) <1E-2) and
+                    (SITES[i][3]==4 or SITES[i][3]==2) and ### Getting to the last site
+                    current[3]!=SITES[i][3] ): ### Not the same site
+                   
+                   current=SITES[i]
+                   #                print("_",SITES[i])
+                   steps.append(i)
+                   #                print("len(steps)=%f" %len(steps))
+                   a=1
+                   break
+
+    #    print("steps=",steps)
+    if(len(steps)!=1 ):
+        Length.append(len(steps))
+        LIST=np.concatenate((LIST,steps)).astype(int)
+
+    #        print("List=",LIST)
+
+
+
+    print(LIST)
+    print()
+    
     for l_index in range(1,len(Length)):
         l_init=np.sum(Length[:l_index])
         l_final=l_init+Length[l_index]
