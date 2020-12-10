@@ -31,7 +31,7 @@ z_pos=np.array([0,0,1,1])
 move=np.ones(len(x_pos))
 
 
-fig=plt.figure(figsize=(8,8))
+fig=plt.figure(figsize=(9,9))
 ax=fig.gca(projection='3d')
 Ni=int(input("Number of tetrahedra in the x direction="))
 Nj=int(input("Number of tetrahedra in the y direction="))
@@ -58,10 +58,10 @@ ax.quiver([0],[0],[0],[0],[2*Nj],[0],color="blue",length=0.2)
 ax.quiver([0],[0],[0],[0],[0],[2*Nk],color="green",length=0.2)
 
 
-linewidth=2
-size_dots=40
-upcolor="gray"
-downcolor="gray"
+linewidth=3
+size_dots=60
+upcolor="k"
+downcolor="k"
 resp_1=1
 for i in range(Ni):
     for j in range(Nj):
