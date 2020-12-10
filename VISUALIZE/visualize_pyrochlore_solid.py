@@ -150,6 +150,7 @@ ax.set_xlabel("$ x $",size=20)
 ax.set_ylabel("$ y $",size=20)
 ax.set_zlabel("$ z $",size=20)
 ax.set_axis_off()
+ax.set_box_aspect((1,1,1))
 plt.show()
 
 
