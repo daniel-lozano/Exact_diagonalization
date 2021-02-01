@@ -47,11 +47,37 @@ z_line=np.linspace(0,Nk*2,points)
 ans1=input("Plot nearest neighbours alpha chain? (y) or (n): ")
 ans2=input("Plot nearest neighbours beta chain? (y) or (n): ")
 ans3=input("Plot arrows? (y) or (n): ")
+N_i=2
+N_j=2
+N_k=2
 
-X_cube=[0,2*Ni,2*Ni,0,0,0,2*Ni,2*Ni,0,0,2*Ni,2*Ni,2*Ni,2*Ni,0,0]#,0]
-Y_cube=[0,0,2*Nj,2*Nj,0,0,0,2*Nj,2*Nj,0,0,0,2*Nj,2*Nj,2*Nj,2*Nj]#2*Nj]
-Z_cube=[0,0,0,0,0,2*Nk,2*Nk,2*Nk,2*Nk,2*Nk,2*Nk,0,0,2*Nk,2*Nk,0]#,2*Nk]
-ax.plot(X_cube,Y_cube,Z_cube,linewidth=0.5)
+X_cube=[0,2*N_i,2*N_i,0,0,0,2*N_i,2*N_i,0,0,2*N_i,2*N_i,2*N_i,2*N_i,0,0]#,0]
+Y_cube=[0,0,2*N_j,2*N_j,0,0,0,2*N_j,2*N_j,0,0,0,2*N_j,2*N_j,2*N_j,2*N_j]#2*Nj]
+Z_cube=[0,0,0,0,0,2*N_k,2*N_k,2*N_k,2*N_k,2*N_k,2*N_k,0,0,2*N_k,2*N_k,0]#,2*Nk]
+ax.plot(X_cube,Y_cube,Z_cube,linewidth=0.5,color="k")
+if(N_i<Ni):
+    for i in range(Ni-N_i):
+        ax.plot(np.array(X_cube)+4*(i+1),np.array(Y_cube)+0,np.array(Z_cube)+0,linewidth=0.5,color="k")
+        for j in range(Nj-N_j):
+            ax.plot(np.array(X_cube)+4*(i+1),np.array(Y_cube)+4*(j+1),np.array(Z_cube)+0,linewidth=0.5,color="k")
+            for k in range(Nk-N_k):
+                ax.plot(np.array(X_cube)+4*(i+1),np.array(Y_cube)+0,np.array(Z_cube)+4*(k+1),linewidth=0.5,color="k")
+if(N_j<Nj):
+    for j in range(Nj-N_j):
+        ax.plot(np.array(X_cube)+0,np.array(Y_cube)+4*(j+1),np.array(Z_cube)+0,linewidth=0.5,color="k")
+        for i in range(Ni-N_i):
+            ax.plot(np.array(X_cube)+4*(i+1),np.array(Y_cube)+4*(j+1),np.array(Z_cube)+0,linewidth=0.5,color="k")
+            for k in range(Nk-N_k):
+                ax.plot(np.array(X_cube)+0,np.array(Y_cube)+4*(j+1),np.array(Z_cube)+4*(k+1),linewidth=0.5,color="k")
+        
+if(N_k<Nk):
+    for k in range(Nk-N_k):
+        ax.plot(np.array(X_cube)+0,np.array(Y_cube)+0,np.array(Z_cube)+4*(k+1),linewidth=0.5,color="k")
+        for i in range(Ni-N_i):
+            ax.plot(np.array(X_cube)+4*(i+1),np.array(Y_cube)+0,np.array(Z_cube)+4*(k+1),linewidth=0.5,color="k")
+            for j in range(Nj-N_j):
+                ax.plot(np.array(X_cube)+4*(i+1),np.array(Y_cube)+4*(j+1),np.array(Z_cube)+4*(k+1),linewidth=0.5,color="k")
+    
 headlength=1
 ax.quiver([0],[0],[0],[2*Ni],[0],[0],color="red",length=0.2)
 ax.quiver([0],[0],[0],[0],[2*Nj],[0],color="blue",length=0.2)
@@ -59,7 +85,7 @@ ax.quiver([0],[0],[0],[0],[0],[2*Nk],color="green",length=0.2)
 
 
 linewidth=3
-size_dots=60
+size_dots=100
 upcolor="k"
 downcolor="k"
 resp_1=1
