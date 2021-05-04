@@ -137,38 +137,63 @@ def plot_solid_tetrahedra(ax,translation):
 
 #    fig = plt.figure()
 #    ax = fig.add_subplot(111, projection='3d')
-    up1 = mp3d.art3d.Poly3DCollection([Tx1+FCC_translation], alpha=0.5, linewidth=1)
-    up2 = mp3d.art3d.Poly3DCollection([Tx2+FCC_translation], alpha=0.5, linewidth=1)
-    up3 = mp3d.art3d.Poly3DCollection([Tx3+FCC_translation], alpha=0.5, linewidth=1)
-    up4 = mp3d.art3d.Poly3DCollection([Tx4+FCC_translation], alpha=0.5, linewidth=1)
 
-    down1 = mp3d.art3d.Poly3DCollection([Dx1+Shift_1+FCC_translation], alpha=0.5, linewidth=1)
-    down2 = mp3d.art3d.Poly3DCollection([Dx2+Shift_1+FCC_translation], alpha=0.5, linewidth=1)
-    down3 = mp3d.art3d.Poly3DCollection([Dx3+Shift_1+FCC_translation], alpha=0.5, linewidth=1)
-    down4 = mp3d.art3d.Poly3DCollection([Dx4+Shift_1+FCC_translation], alpha=0.5, linewidth=1)
+    alpha_param=0.6
 
-    down5 = mp3d.art3d.Poly3DCollection([Dx1+Shift_2+FCC_translation], alpha=0.5, linewidth=1)
-    down6 = mp3d.art3d.Poly3DCollection([Dx2+Shift_2+FCC_translation], alpha=0.5, linewidth=1)
-    down7 = mp3d.art3d.Poly3DCollection([Dx3+Shift_2+FCC_translation], alpha=0.5, linewidth=1)
-    down8 = mp3d.art3d.Poly3DCollection([Dx4+Shift_2+FCC_translation], alpha=0.5, linewidth=1)
+    up1 = mp3d.art3d.Poly3DCollection([Tx1+FCC_translation], alpha=alpha_param, linewidth=1)
+    up2 = mp3d.art3d.Poly3DCollection([Tx2+FCC_translation], alpha=alpha_param, linewidth=1)
+    up3 = mp3d.art3d.Poly3DCollection([Tx3+FCC_translation], alpha=alpha_param, linewidth=1)
+    up4 = mp3d.art3d.Poly3DCollection([Tx4+FCC_translation], alpha=alpha_param, linewidth=1)
+
+    down1 = mp3d.art3d.Poly3DCollection([Dx1+Shift_1+FCC_translation], alpha=alpha_param, linewidth=1)
+    down2 = mp3d.art3d.Poly3DCollection([Dx2+Shift_1+FCC_translation], alpha=alpha_param, linewidth=1)
+    down3 = mp3d.art3d.Poly3DCollection([Dx3+Shift_1+FCC_translation], alpha=alpha_param, linewidth=1)
+    down4 = mp3d.art3d.Poly3DCollection([Dx4+Shift_1+FCC_translation], alpha=alpha_param, linewidth=1)
+
+    down5 = mp3d.art3d.Poly3DCollection([Dx1+Shift_2+FCC_translation], alpha=alpha_param, linewidth=1)
+    down6 = mp3d.art3d.Poly3DCollection([Dx2+Shift_2+FCC_translation], alpha=alpha_param, linewidth=1)
+    down7 = mp3d.art3d.Poly3DCollection([Dx3+Shift_2+FCC_translation], alpha=alpha_param, linewidth=1)
+    down8 = mp3d.art3d.Poly3DCollection([Dx4+Shift_2+FCC_translation], alpha=alpha_param, linewidth=1)
 
 
+    up1.set_facecolor((0.1, 0.1, 0.1, alpha_param))
+    up2.set_facecolor((0.1, 0.1, 0.1, alpha_param))
+    up3.set_facecolor((0.1, 0.1, 0.1, alpha_param))
+    up4.set_facecolor((0.1, 0.1, 0.1, alpha_param))
 
-    alpha = 0.2
-    up1.set_facecolor((0, 0, 1, alpha))
-    up2.set_facecolor((0, 0, 1, alpha))
-    up3.set_facecolor((0, 0, 1, alpha))
-    up4.set_facecolor((0, 0, 1, alpha))
-
-    down1.set_facecolor((0.5, 0, 0, alpha))
-    down2.set_facecolor((0.5, 0, 0, alpha))
-    down3.set_facecolor((0.5, 0, 0, alpha))
-    down4.set_facecolor((0.5, 0, 0, alpha))
-
-    down5.set_facecolor((0.5, 0, 0, alpha))
-    down6.set_facecolor((0.5, 0, 0, alpha))
-    down7.set_facecolor((0.5, 0, 0, alpha))
-    down8.set_facecolor((0.5, 0, 0, alpha))
+    down1.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down2.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down3.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down4.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down5.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down6.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down7.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down8.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down1.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down2.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down3.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    down4.set_facecolor((0.5, 0.5, 0.5, alpha_param))
+    
+#    up1.set_facecolor((0., 0., 1, alpha_param))
+#    up2.set_facecolor((0., 0., 1, alpha_param))
+#    up3.set_facecolor((0., 0., 1, alpha_param))
+#    up4.set_facecolor((0., 0., 1, alpha_param))
+#
+##
+#    down1.set_facecolor((0.5, 0, 0, alpha_param))
+#    down2.set_facecolor((0.5, 0, 0, alpha_param))
+#    down3.set_facecolor((0.5, 0, 0, alpha_param))
+#    down4.set_facecolor((0.5, 0, 0, alpha_param))
+#
+#    down5.set_facecolor((0.5, 0, 0, alpha_param))
+#    down6.set_facecolor((0.5, 0, 0, alpha_param))
+#    down7.set_facecolor((0.5, 0, 0, alpha_param))
+#    down8.set_facecolor((0.5, 0, 0, alpha_param))
+#
+#    down5.set_facecolor((0.5, 0., 0, alpha_param))
+#    down6.set_facecolor((0.5, 0., 0, alpha_param))
+#    down7.set_facecolor((0.5, 0., 0, alpha_param))
+#    down8.set_facecolor((0.5, 0., 0, alpha_param))
     
     ax.add_collection3d(up1)
     ax.add_collection3d(up2)
